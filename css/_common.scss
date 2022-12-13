@@ -1,0 +1,27 @@
+// 共通
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  // color: #333333;
+  overflow-x: hidden;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+#wrapper {
+  width: 100%;
+  overflow: hidden !important;  // overflow-xのみでは2本スクロールバーが出てしまう
+}
+
+a {
+  text-decoration: none;
+  color: #333333;
+}
+
+// common.scssでのimgの指定は禁止
+// img {
+//   width: 100%;  //Swiper対策の為、max-widthの使用禁止
+//   height: auto;
+// }

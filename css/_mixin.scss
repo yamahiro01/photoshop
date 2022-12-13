@@ -1,0 +1,28 @@
+$sp: 767px;  // スマホ（767px未満）
+$tab: 1199px;  // タブレット（1199px未満）
+$mv-p: 1365px;  // メインビジュアル用（1366px未満）
+$services-c: 1500px;  // メインビジュアル用（1367px以上）
+
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+
+@mixin mv-p {
+  @media (max-width: ($mv-p)) {
+    @content;
+  }
+}
+
+@mixin services-c {
+  @media (min-width: ($services-c)) {
+    @content;
+  }
+}

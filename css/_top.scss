@@ -1,0 +1,2461 @@
+@use "mixin";
+
+/* ===============================================
+# ローディング画面
+=============================================== */
+
+.loading{
+  width: 100vw;
+  height: 100vh;
+  background-color: #4b6cb7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+
+  img {
+    width: 300px;
+  }
+}
+
+/* ===============================================
+# ヘッダー
+=============================================== */
+
+.header {
+  background-image: linear-gradient(to right, #4b6cb7, #182848);
+  width: 100%;
+  height: 80px;
+  // padding: 0 39px;
+  z-index: 70;
+
+  @include mixin.sp {
+    height: 56px;
+  }
+
+  .inner {
+    max-width: 1366px;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 39px;  // ヘッダーのpaddingは必ず.innerに効かせる
+
+    @include mixin.tab {
+      padding: 0 20px;
+    }
+
+    @include mixin.sp {
+      justify-content: space-between;
+    }
+
+    .header-logo {
+      margin-right: 30px;
+
+      a img {
+        width: 136px;
+        height: 29px;
+
+        @include mixin.sp {
+          z-index: 900;
+        }
+      }
+    }
+
+    // PC用メニュー
+    .nav {
+
+      @include mixin.sp {
+        display: none;
+      }
+
+      &-items {
+        display: flex;
+        align-items: center;
+
+        &__item {
+          text-align: center;
+          padding-left: 7px;
+          padding-right: 7px;
+          // line-height: 14px;
+
+          a {
+
+            p {
+              color: #ffffff;
+            }
+
+            .ja {
+              font-size: 16px;
+              margin-bottom: 5px;
+
+              @include mixin.tab {
+                font-size: clamp(12px, 1.5vw, 16px);
+              }
+            }
+
+            .en {
+              font-family: 'Lato', sans-serif;
+              font-size: 10px;
+            }
+          }
+        }
+
+        .border {
+          width: 21px;
+          height: 25px;
+          margin-bottom: 3px;
+          transform: scaleX(-1);  // 左右反転
+          
+
+          hr {
+            // 斜め線の描写
+            transform: rotate(50deg);
+            transform-origin: 0% 0%;
+            width: 32.6px;
+            border: 0;
+            border-top: 1.5px solid #ffffff;
+            margin: 0;
+            padding: 0;
+          }
+        }
+      }
+    }
+
+    /* ハンバーガーメニュー */
+    .c-hamburger{
+      display: none;
+
+      @include mixin.sp {
+        display: block;
+        position: relative;
+        width: 20px;
+        height: 16px;
+        background: none;
+        border: none;
+        appearance: none;
+        cursor: pointer;
+        z-index: 200;  //ドロワーメニューより数値を上げる
+      }
+
+      span {
+        display: none;
+
+        @include mixin.sp {
+          display: inline-block;
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          border-radius: 4px;
+          background-color: #ffffff;
+          transition: all .4s;
+        }
+      }
+    }
+
+    .c-hamburger span:nth-child(1){
+      top: 0;
+    }
+
+    .c-hamburger span:nth-child(2){
+      top: 7px;
+    }
+
+    .c-hamburger span:nth-child(3){
+      bottom: 0;
+    }
+
+    /* クリック時のハンバーガーメニューのスタイリング */
+    .c-hamburger.is-checked span:nth-child(1){
+      transform: translateY(7px) rotate(-45deg);
+    }
+
+    .c-hamburger.is-checked span:nth-child(2){
+      opacity: 0;
+    }
+    
+    .c-hamburger.is-checked span:nth-child(3){
+      transform: translateY(-7px) rotate(45deg);
+    }
+
+    // スマホ用ドロワーメニュー
+    .c-drawer{
+      display: none;
+
+      @include mixin.sp {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background-color: #4b6cb7;  /*ハンバーガーメニュークリック時のナビゲーションメニュー背景色*/
+        top:0;
+        left: 0;
+        z-index: 100;
+      }
+    }
+
+    // ハンバーガーメニュークリック時にドロワー表示
+    .c-drawer.is-checked{
+      display: block;
+    }
+
+    // スマホ用ドロワーメニューのレイアウト
+    .drawer-header {
+      height: 56px;
+      margin-bottom: 79px;
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .c-drawer__list {
+      display: block;
+      text-align: center;
+
+      .c-drawer__item:not(:last-child) {
+        margin-bottom: 40px;
+      }
+
+      .c-drawer__link {
+        display: inline-block;
+        text-decoration: none;
+        color: #ffffff;
+  
+        .ja {
+          font-size: 20px;
+        }
+  
+        .en {
+          font-size: 14px;
+          margin-top: 7px;
+        }
+  
+        .ja-top {
+          color: #191919;
+          font-size: 20px;
+        }
+  
+        .en-top {
+          color: #191919;
+          font-size: 14px;
+          margin-top: 7px;
+        }
+      }
+    }
+  }
+}
+
+// 固定ヘッダー用
+.header.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;  /*position:fixed;にしたため、横幅100vwを設定*/
+  background-image: none;
+  background-color: #ffffff;
+}
+
+/* ===============================================
+# メインビジュアル
+=============================================== */
+
+.mv {
+  background-image: linear-gradient(to right, #4b6cb7, #182848);
+  width: 100%;
+  height: 688px;
+  position: relative;
+  z-index: -10;
+
+  @include mixin.sp {
+    height: 611px;
+  }
+
+  // PC用メインビジュアル
+  .mv-img {
+    width: 1366px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -9;
+
+    @include mixin.mv-p {
+      width: 100%;
+      height: auto;
+      // overflow-x: hidden;
+      object-fit: cover;
+    }
+
+    @include mixin.sp {
+      display: none;
+    }
+
+    // PC用メインビジュアル切替
+    .image {
+      position: absolute;  //3枚の切り替え画像を同じ位置に重ねる為に使用
+      opacity: 0;
+      animation: change-img-anim 15s infinite;
+    }
+
+    .image:nth-of-type(1) {
+      animation: change-img-anim-first 15s infinite;
+      animation-delay: 0s;
+    }
+
+    .image:nth-of-type(2) {
+      animation-delay: 5s;
+    }
+
+    .image:nth-of-type(3) {
+      animation-delay: 10s;
+    }
+
+    @keyframes change-img-anim-first {
+      0%{ opacity: 1;}
+      30%{ opacity: 1;}
+      36%{ opacity: 1;}
+      45%{ opacity: 0;}
+      100%{ opacity: 0;}
+    }
+
+    @keyframes change-img-anim {
+      0%{ opacity: 0;}
+      30%{ opacity: 1;}
+      36%{ opacity: 1;}
+      45%{ opacity: 0;}
+      100%{ opacity: 0;}
+    }
+  }
+
+  // スマホ用メインビジュアル
+  .sp-mv {
+    display: none;
+
+    @include mixin.sp {
+      display: block;
+      width: 375px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -9;
+    }
+
+    // スマホ用メインビジュアル切替
+    .sp-image {
+      position: absolute;  //3枚の切り替え画像を同じ位置に重ねる為に使用
+      opacity: 0;
+      animation: change-img-anim 15s infinite;
+    }
+
+    .sp-image:nth-of-type(1) {
+      animation: change-img-anim-first 15s infinite;
+      animation-delay: 0s;
+    }
+
+    .sp-image:nth-of-type(2) {
+      animation-delay: 5s;
+    }
+
+    .sp-image:nth-of-type(3) {
+      animation-delay: 10s;
+    }
+
+    @keyframes change-img-anim-first {
+      0%{ opacity: 1;}
+      30%{ opacity: 1;}
+      36%{ opacity: 1;}
+      45%{ opacity: 0;}
+      100%{ opacity: 0;}
+    }
+
+    @keyframes change-img-anim {
+      0%{ opacity: 0;}
+      30%{ opacity: 1;}
+      36%{ opacity: 1;}
+      45%{ opacity: 0;}
+      100%{ opacity: 0;}
+    }
+  }
+
+  .inner {
+    max-width: 1016px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 100px 0 16px;
+
+    .main-ttl {
+      font-family: 'Lato', sans-serif;
+      color: #ffffff;
+      font-size: 96px;
+      font-weight: 900;
+      line-height: 112px;
+      letter-spacing: 1.92px;
+      text-shadow: 4.2px 4.2px 4px rgba(24, 40, 72, 0.5);
+      margin-bottom: 25px;
+
+      @include mixin.tab {
+        font-size: 72px;
+        line-height: 85px;
+        padding: 0 20px;
+      }
+
+      @include mixin.sp {
+        font-size: 48px;
+        line-height: 58px;
+      }
+
+      .sp-br {
+        display: none;
+
+        @include mixin.sp {
+          display: block;
+        }
+      }
+    }
+
+    .sub-ttl__1 {
+      background-color: #ffffff;
+      width: 305px;
+      height: 64px;
+      text-align: center;
+      padding: 16px 0;
+      margin-bottom: 15px;
+      margin-left: 28px;
+      box-shadow: 8px 4px #182848;
+      transform: skewX(-40deg);
+
+      @include mixin.tab {
+        width: 270px;
+        height: 50px;
+        padding: 12px 0;
+        margin-left: 48px;
+      }
+
+      @include mixin.sp {
+        width: 208px;
+        height: 36px;
+        padding: 8.25px 0;
+        margin-left: 28px;
+        box-shadow: 3px 2px #182848;
+        transform: skewX(-25deg);
+      }
+    }
+
+    .sub-ttl__2 {
+      background-color: #ffffff;
+      width: 465px;
+      height: 64px;
+      text-align: center;
+      padding: 16px 0;
+      margin-bottom: 115px;
+      margin-left: 28px;
+      box-shadow: 8px 4px #182848;
+      transform: skewX(-40deg);
+
+      @include mixin.tab {
+        width: 400px;
+        height: 50px;
+        padding: 12px 0;
+        margin-left: 48px;
+      }
+
+      @include mixin.sp {
+        width: 308px;
+        height: 36px;
+        padding: 8.25px 0;
+        margin-left: 28px;
+        margin-bottom: 140px;
+        box-shadow: 3px 2px #182848;
+        transform: skewX(-25deg);
+      }
+    }
+
+    h2 {
+      color: #182848;
+      font-size: 32px;
+      font-weight: bold;
+      line-height: 32px;
+      transform: skewX(40deg);
+
+      @include mixin.tab {
+        font-size: 26px;
+        line-height: 26px;
+      }
+
+      @include mixin.sp {
+        font-size: 19.5px;
+        line-height: 19.5px;
+        transform: skewX(25deg);
+      }
+    }
+
+    .news {
+      display: flex;
+      align-items: center;
+      height: 64px;
+      background-color: #182848;
+      position: relative;
+
+      @include mixin.tab {
+        width: 710px;
+        margin-left: 20px;
+      }
+
+      @include mixin.sp {
+        display: block;
+        width: 100%;
+        padding: 0 20px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: transparent;
+      }
+
+      .en-ttl {
+        width: 148px;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        line-height: 64px;
+        padding-left: 42px;
+
+        @include mixin.tab {
+          width: 120px;
+          padding-left: 30px;
+        }
+
+        @include mixin.sp {
+          display: none;
+        }
+      }
+
+      .white-area {
+        width: 780px;
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        height: 60px;  // 親要素のheight - .white-areaのheightで上下の隙間を作る
+        transform: skewX(-40deg);
+        // margin-left: 27px;  // 傾斜による隙間を埋める為、左に寄せる
+
+        @include mixin.tab {
+          width: 500px;
+        }
+
+        @include mixin.sp {
+          width: inherit;
+          transform: none;
+          border: 1.5px solid #182848;
+
+          &::before {
+            content: "NEWS";
+            width: 74px;
+            height: 0;  // borderで台形を作る為に高さをなくす
+            color: #ffffff;
+            font-size: 14px;
+            text-align: center;
+            line-height: 22px;
+            border-bottom: 22px solid #182848;
+            border-right: 10px solid transparent;
+            position: absolute;
+            top: -22px;
+            left: 20px;
+          }
+        }
+
+        .date {
+          transform: skewX(40deg);
+          color: #191919;
+          font-size: 16px;
+          padding-left: 51px;
+
+          // @include mixin.tab {
+          //   padding-left: 30px;
+          // }
+
+          @include mixin.sp {
+            font-size: 14px;
+            padding-left: 8px;
+            transform: none;
+          }
+        }
+
+        .ja-ttl {
+          background-color: #b8614b;
+          color: #ffffff;
+          transform: skewX(40deg);
+          padding: 8px 16px;
+          margin: 0 24px;
+          border-radius: 6px;
+
+          @include mixin.sp {
+            padding: 4px 8px;
+            margin: 0 7px;
+            transform: none;
+          }
+
+          p {
+            font-size: 12px;
+          }
+        }
+
+        .info {
+          color: #191919;
+          font-size: 16px;
+          transform: skewX(40deg);
+
+          @include mixin.sp {
+            font-size: 14px;
+            transform: none;
+          }
+        }
+      }
+
+      &::before {
+        content: "";
+        width: 14px;
+        height: 4px;
+        border-bottom: 1.5px solid #ffffff;
+        border-right: 1.5px solid #ffffff;
+        transform: skew(45deg);
+        position: absolute;
+        right: 36px;
+
+        // @include mixin.tab {
+        //   right: 10%;
+        // }
+
+        @include mixin.sp {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# 事業内容
+=============================================== */
+
+.services {
+  display: flex;
+  align-items: flex-start;  // 上下の位置を上端揃え
+  width: 100%;
+  height: 435px;
+  padding: 200px 0 160px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  @include mixin.services-c {
+    padding-left: 15%;
+  }
+
+  @include mixin.tab {
+    display: block;
+    height: fit-content;
+    text-align: center;
+    padding: 160px 0;
+  }
+
+  @include mixin.sp {
+    display: block;
+    height: fit-content;
+    padding: 120px 0 0 0;
+    text-align: left;
+    // overflow: visible;
+  }
+
+  // 擬似要素でセクションの変形部分を作成（白部分）
+  &::before {
+    content: "";
+    width: 360px;
+    height: 435px;
+    background-color: #ffffff;
+    transform: skew(-40deg);
+    position: absolute;
+    top: 160px;
+    right: 0;
+    z-index: -1;
+
+    @include mixin.tab {
+      width: 295px;
+      height: 905px;
+      top: 160px;  // padding-topとimgぶんを下にずらす
+      right: -50px;
+      transform: skewX(-25deg);
+    }
+
+    @include mixin.sp {
+      width: 230px;
+      height: 468px;
+      top: 368px;  // padding-topとimgぶんを下にずらす
+      right: -50px;
+      transform: skewX(-25deg);
+    }
+  }
+
+  // 擬似要素でセクションの変形部分を作成(グレー部分)
+  &::after {
+    content: "";
+    width: 100%;
+    height: 435px;
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 160px;
+    left: 0;
+    z-index: -2;
+
+    @include mixin.tab {
+      height: 905px;
+      top: 160px;
+    }
+
+    @include mixin.sp {
+      height: 468px;
+      top: 368px;
+    }
+  }
+
+  img {
+    width: 620px;
+    height: 440px;
+    margin-right: 48px;
+
+    @include mixin.tab {
+      width: 80%;
+      object-fit: cover;
+      margin-right: 0;
+    }
+
+    @include mixin.sp {
+      width: 100%;
+      height: 248px;
+      object-fit: cover;
+      margin-right: 0;
+    }
+  }
+  
+  .text-area {
+
+    @include mixin.tab {
+      padding-top: 30px;
+    }
+
+    @include mixin.sp {
+      padding: 37px 20px 48px;
+    }
+
+    .main-ttl {
+      display: flex;
+      align-items: baseline;
+
+      @include mixin.tab {
+        justify-content: center;
+      }
+      
+      @include mixin.sp {
+        justify-content: left;
+      }
+
+      .en-ttl {
+        color: #191919;
+        font-family: 'Lato', sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+
+        @include mixin.tab {
+          font-size: 40px;
+        }
+
+        @include mixin.sp {
+          font-size: 32px;
+        }
+      }
+
+      .border {
+        width: 21px;
+        height: 25px;
+        margin-left: 8px;
+        margin-right: 8px;
+        margin-bottom: 3px;
+        transform: scaleX(-1);  // 左右反転
+
+        @include mixin.tab {
+          width: 18px;
+          height: 23px;
+          margin-bottom: 0;
+        }
+        
+        @include mixin.sp {
+          width: 18px;
+          height: 21px;
+          margin-bottom: 0;
+        }
+
+        hr {
+          // 斜め線の描写
+          transform: rotate(50deg);
+          transform-origin: 0% 0%;
+          width: 32.6px;
+          border: 0;
+          border-top: 1.5px solid #4b6cb7;
+          margin: 0;
+          padding: 0;
+
+          @include mixin.tab {
+            width: 26px;
+            margin-top: 3px;
+          }
+
+          @include mixin.sp {
+            width: 23px;
+            margin-top: 3px;
+          }
+        }
+      }
+
+      .ja-ttl {
+        color: #4b6cb7;
+        font-size: 24px;
+        font-weight: 500;
+
+        @include mixin.tab {
+          font-size: 22px;
+        }
+
+        @include mixin.sp {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .sub-ttl__1 {
+      color: #191919;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 32px;
+      margin-top: 35px;
+
+      @include mixin.tab {
+        font-size: 28px;
+        line-height: 28px;
+      }
+
+      @include mixin.sp {
+        font-size: 24px;
+        line-height: 24px;
+        margin-top: 25px;
+      }
+    }
+
+    .sub-ttl__2 {
+      color: #191919;
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 32px;
+      margin-top: 15px;
+
+      @include mixin.tab {
+        font-size: 28px;
+        line-height: 28px;
+      }
+
+      @include mixin.sp {
+        font-size: 24px;
+        line-height: 24px;
+      }
+    }
+
+    .contents {
+      color: #191919;
+      font-size: 16px;
+      line-height: 32px;
+      letter-spacing: 0.32px;
+      margin-top: 20px;
+
+      @include mixin.sp {
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.28px;
+
+        br {
+
+          @include mixin.sp {
+            display: none;
+          }
+        }
+      }
+    }
+
+    .detail {
+
+      @include mixin.sp {
+        text-align: center;
+      }
+
+      a {
+        display: inline-block;
+        background-color: #4b6cb7;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 24px 73px 24px 39px;
+        margin-top: 42px;
+        box-shadow: 0px 2px 4px 0 rgba(24, 40, 72, 0.46);
+        position: relative;
+  
+        @include mixin.sp {
+          font-size: 14px;
+          margin-top: 31px;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 15px 78px 15px 52px;
+        }
+  
+        &::before {
+          content: "";
+          width: 14px;
+          height: 4px;
+          border-bottom: 1.5px solid #ffffff;
+          border-right: 1.5px solid #ffffff;
+          transform: skew(45deg);
+          position: absolute;
+          bottom: 28px;
+          right: 50px;  // カンプの値 ＋ 8
+
+          @include mixin.sp {
+            bottom: 19px;
+            right: 48px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# 園崎組について
+=============================================== */
+
+.about {
+  background: url(../img/1x/background-image-about.jpg) no-repeat center center/cover;
+  height: 656px;
+  position: relative;
+
+  @include mixin.sp {
+    background: none;
+    height: fit-content;
+    padding: 120px 20px 0 20px;
+    position: initial;
+  }
+
+  .sp-img {
+    display: none;
+
+    @include mixin.sp {
+      display: block;
+      width: 100%;
+      height: 248px;
+      object-fit: cover;
+
+    }
+  }
+
+  .card {
+    width: 504px;
+    height: 576px;
+    background-color: #ffffff;
+    padding: 40px;
+    position: absolute;
+    top: 40px;
+    left: 175px;
+
+    @include mixin.tab {
+      // calcによる上下左右中央揃え
+      top: calc(50% - 576px / 2);  // calc(50% - height / 2)
+      left: calc(50% - 504px / 2);  // calc(50% - width / 2)
+      // aos.cssのデフォルトtransformによって下記transformが使えない
+      // transform: translate(-50%, -50%);
+    }
+
+    @include mixin.sp {
+      position: initial;
+      width: 100%;
+      height: fit-content;
+      padding: 0;
+      transform: none;
+    }
+
+    .main-ttl {
+      display: flex;
+      align-items: baseline;
+
+      .en-ttl {
+        color: #191919;
+        font-family: 'Lato', sans-serif;
+        font-size: 48px;
+        font-weight: bold;
+
+        @include mixin.tab {
+          font-size: 40px;
+        }
+
+        @include mixin.sp {
+          font-size: 32px;
+          margin-top: 37px;
+        }
+      }
+
+      .border {
+        width: 21px;
+        height: 25px;
+        margin-left: 8px;
+        margin-right: 8px;
+        margin-bottom: 3px;
+        transform: scaleX(-1);  // 左右反転
+
+        @include mixin.tab {
+          width: 18px;
+          height: 23px;
+          margin-bottom: 0;
+        }
+
+        @include mixin.sp {
+          width: 18px;
+          height: 21px;
+          margin-bottom: 0;
+        }
+        
+
+        hr {
+          // 斜め線の描写
+          transform: rotate(50deg);
+          transform-origin: 0% 0%;
+          width: 32.6px;
+          border: 0;
+          border-top: 1.5px solid #4b6cb7;
+          margin: 0;
+          padding: 0;
+
+          @include mixin.tab {
+            width: 26px;
+            margin-top: 3px;
+          }
+
+          @include mixin.sp {
+            width: 23px;
+            margin-top: 3px;
+          }
+        }
+      }
+
+      .ja-ttl {
+        color: #4b6cb7;
+        font-size: 24px;
+        font-weight: 500;
+
+        @include mixin.tab {
+          font-size: 22px;
+        }
+
+        @include mixin.sp {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .contents {
+      color: #191919;
+      font-size: 16px;
+      line-height: 32px;
+      letter-spacing: 0.32px;
+      margin-top: 25px;
+
+      @include mixin.sp {
+        font-size: 14px;
+        line-height: 28px;
+        letter-spacing: 0.28px;
+        margin-top: 20px;
+      }
+
+      .pc-br {
+
+        @include mixin.sp {
+          display: none;
+        }
+      }
+    }
+
+    .detail {
+
+      @include mixin.sp {
+        text-align: center;
+      }
+
+      a {
+        display: inline-block;
+        background-color: #4b6cb7;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 25px 105px 23px 71px;
+        margin-top: 40px;
+        margin-bottom: 30px;
+        box-shadow: 0px 2px 4px 0 rgba(24, 40, 72, 0.46);
+        position: relative;
+  
+        @include mixin.sp {
+          font-size: 14px;
+          padding: 15px 110px 15px 76px;
+          margin-top: 26px;
+          margin-bottom: 0;
+        }
+  
+        &::before {
+          content: "";
+          width: 14px;
+          height: 4px;
+          border-bottom: 1.5px solid #ffffff;
+          border-right: 1.5px solid #ffffff;
+          transform: skew(45deg);
+          position: absolute;
+          bottom: 28px;
+          right: 82px;  // カンプの値 ＋ 8
+
+          @include mixin.sp {
+
+            bottom: 19px;
+          }
+        }
+      }
+
+    }
+
+    .pc-img {
+
+      @include mixin.sp {
+        display: none;
+      }
+    }
+  }
+}
+
+/* ===============================================
+# 園崎組の実績
+=============================================== */
+
+.works {
+  width: 100%;
+  height: 765px;
+  padding: 160px 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  @include mixin.tab {
+    height: fit-content;
+  }
+
+  @include mixin.sp {
+    height: fit-content;
+    padding: 147px 0 35.33px;
+  }
+
+  // 擬似要素でセクションの変形部分を作成(ホワイト部分・左右可動)
+  &::before {
+    content: "";
+    width: 1310px;
+    height: 765px;
+    background-color: #ffffff;
+    transform: skew(40deg);
+    position: absolute;
+    top: 160px;
+    right: 30px;
+    z-index: -1;
+
+    @include mixin.tab {
+      width: 640px;
+      height: 1270px;
+      right: -135px;
+      transform: skewX(40deg);
+    }
+
+    @include mixin.sp {
+      width: 640px;
+      height: 1010px;
+      top: 120px;  // padding-topぶんを下にずらす
+      right: -135px;
+      transform: skewX(-25deg);
+    }
+  }
+
+  // 擬似要素でセクションの変形部分を作成(グレー部分・左右固定 left,right指定禁止)
+  &::after {
+    content: "";
+    width: 100%;
+    height: 765px;
+    background-color: #f0f0f0;
+    position: absolute;
+    top: 160px;
+    left: 0;
+    z-index: -2;
+
+    @include mixin.tab {
+      height: 1270px;
+    }
+
+    @include mixin.sp {
+      height: 1010px;
+      top: 120px;
+    }
+  }
+
+  .main-ttl {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    @include mixin.sp {
+      justify-content: left;
+      padding: 0 20px;
+    }
+
+    .en-ttl {
+      color: #191919;
+      font-family: 'Lato', sans-serif;
+      font-size: 48px;
+      font-weight: bold;
+
+      @include mixin.tab {
+        font-size: 40px;
+      }
+
+      @include mixin.sp {
+        font-size: 32px;
+      }
+    }
+
+    .border {
+      width: 21px;
+      height: 25px;
+      margin-left: 8px;
+      margin-right: 8px;
+      margin-bottom: 3px;
+      transform: scaleX(-1);  // 左右反転
+
+      @include mixin.tab {
+        width: 18px;
+        height: 23px;
+        margin-bottom: 0;
+      }
+      
+      @include mixin.sp {
+        width: 18px;
+        height: 21px;
+        margin-bottom: 0;
+      }
+
+      hr {
+        // 斜め線の描写
+        transform: rotate(50deg);
+        transform-origin: 0% 0%;
+        width: 32.6px;
+        border: 0;
+        border-top: 1.5px solid #4b6cb7;
+        margin: 0;
+        padding: 0;
+
+        @include mixin.tab {
+          width: 26px;
+          margin-top: 3px;
+        }
+
+        @include mixin.sp {
+          width: 23px;
+          margin-top: 3px;
+        }
+      }
+    }
+
+    .ja-ttl {
+      color: #4b6cb7;
+      font-size: 24px;
+      font-weight: 500;
+
+      @include mixin.tab {
+        font-size: 22px;
+      }
+
+      @include mixin.sp {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .sub-ttl {
+    color: #191919;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 25px;
+
+    @include mixin.tab {
+      font-size: 28px;
+    }
+
+    @include mixin.sp {
+      font-size: 24px;
+      line-height: 36px;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    .sp-br {
+      display: none;
+
+      @include mixin.sp {
+        display: block;
+      }
+    }
+  }
+
+  .introduce {
+    color: #191919;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: 0.32px;
+    text-align: center;
+    margin-top: 33px;
+
+    @include mixin.sp {
+      font-size: 14px;
+      line-height: 28px;
+      letter-spacing: 0.28px;
+      margin-top: 16px;
+      margin-bottom: 36px;
+      text-align: left;
+      padding: 0 20px;
+    }
+
+    .pc-br {
+
+      @include mixin.sp {
+        display: none;
+      }
+    }
+  }
+
+  // PC用
+  .works-card {
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;  // cardを中心からずらす為のpadding
+    margin-top: 50px;
+
+    @include mixin.tab {
+      display: block;
+      padding-left: 0;
+    }
+
+    @include mixin.sp {
+      display: none;  // スマホでは非表示
+    }
+
+    .card__1 {
+      width: 472px;
+      height: 408px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px 0 rgba(25, 25, 25, 0.25);
+      position: relative;
+
+      @include mixin.tab {
+        margin-left: auto;  // 中央揃えしたい要素そのものに効かす
+        margin-right: auto;
+      }
+
+      &::before {
+        content: "01";
+        width: 56px;
+        height: 56px;
+        background-color: #182848;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 24px;
+        // font-weight: 500;  // Google fontで提供されていないため使用不可
+        position: absolute;
+        top: -16px;
+        left: -16px; 
+        text-align: center;
+        line-height: 56px;
+      }
+
+      img {
+        width: 472px;
+        height: 240px;
+      }      
+
+      .text-area {
+        padding: 30px 24px 36px;
+
+        .ttl {
+          color: #b8614b;
+          font-size: 24px;
+          font-weight: 500;
+        }
+
+        .contents {
+          color: #191919;
+          font-size: 16px;
+          line-height: 32px;
+          letter-spacing: 0.32px;
+          margin-top: 30px;
+        }
+      }
+    }
+
+    .card__2 {
+      width: 472px;
+      height: 408px;
+      background-color: #ffffff;
+      margin-left: 40px;
+      box-shadow: 0 0 10px 0 rgba(25, 25, 25, 0.25);
+      position: relative;
+
+      @include mixin.tab {
+        margin-left: auto;  // 中央揃えしたい要素そのものに効かす
+        margin-right: auto;
+        margin-top: 70px;
+      }
+
+      &::before {
+        content: "02";
+        width: 56px;
+        height: 56px;
+        background-color: #182848;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 24px;
+        // font-weight: 500;
+        position: absolute;
+        top: -16px;
+        left: -16px; 
+        text-align: center;
+        line-height: 56px;
+      }
+
+      img {
+        width: 472px;
+        height: 240px;
+      }
+
+      .text-area {
+        padding: 30px 24px 36px;
+
+        .ttl {
+          color: #b8614b;
+          font-size: 24px;
+          font-weight: 500;
+        }
+
+        .contents {
+          color: #191919;
+          font-size: 16px;
+          line-height: 32px;
+          letter-spacing: 0.32px;
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+
+  // スマホ用
+  .sp-works {
+    display: none;  // PCでは非表示
+
+    @include mixin.sp {
+      display: block;
+    }
+
+    .sp__1 {
+      position: relative;
+
+      // imgにposition: relativeは効かない為、親要素のdivに効かす
+      &::before {
+        content: "01";
+        width: 64px;
+        height: 40px;
+        background-color: #182848;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+        // font-weight: 500;  // Google fontで提供されていないため使用不可
+        position: absolute;
+        top: 120px;
+        left: 0; 
+        text-align: center;
+        line-height: 40px;  //heightに合わせて上下中央揃え
+      }
+
+      &-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+
+      .text-area {
+        padding: 20px 20px 33px;
+
+        .ttl {
+          color: #b8614b;
+          font-size: 20px;
+          line-height: 20px;
+          font-weight: 500;
+        }
+
+        .contents {
+          color: #191919;
+          font-size: 14px;
+          line-height: 28px;
+          letter-spacing: 0.28px;
+          margin-top: 15px;
+        }
+      }
+    }
+
+    .sp__2 {
+      position: relative;
+
+      // imgにposition: relativeは効かない為、親要素のdivに効かす
+      &::before {
+        content: "02";
+        width: 64px;
+        height: 40px;
+        background-color: #182848;
+        color: #ffffff;
+        font-family: 'Lato', sans-serif;
+        font-size: 20px;
+        // font-weight: 500;  // Google fontで提供されていないため使用不可
+        position: absolute;
+        top: 120px;
+        left: 0; 
+        text-align: center;
+        line-height: 40px;  //heightに合わせて上下中央揃え
+      }
+
+      &-img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+      }
+
+      .text-area {
+        padding: 20px 20px 0;
+
+        .ttl {
+          color: #b8614b;
+          font-size: 20px;
+          line-height: 20px;
+          font-weight: 500;
+        }
+
+        .contents {
+          color: #191919;
+          font-size: 14px;
+          line-height: 28px;
+          letter-spacing: 0.28px;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+
+  .center-btn {
+    text-align: center;
+
+    a {
+      display: inline-block;
+      background-color: #4b6cb7;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 25px 89px 23px 55px;
+      margin-top: 40px;
+      box-shadow: 0px 2px 4px 0 rgba(24, 40, 72, 0.46);
+      position: relative;
+
+      @include mixin.sp {
+        font-size: 14px;
+        line-height: 14px;
+        padding: 15px 93px 15px 65px;
+        margin-top: 33px;
+      }
+  
+      &::before {
+        content: "";
+        width: 14px;
+        height: 4px;
+        border-bottom: 1.5px solid #ffffff;
+        border-right: 1.5px solid #ffffff;
+        transform: skew(45deg);
+        position: absolute;
+        bottom: 28px;
+        right: 60px;
+
+        @include mixin.sp {
+          bottom: 19px;
+          right: 70px;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# 採用情報
+=============================================== */
+
+.recruit {
+  background-color: #f0f0f0;
+  padding: 80px 0;
+
+  @include mixin.sp {
+    background-color: #ffffff;
+    padding: 120px 0 0 0;
+  }
+
+  .main-ttl {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    @include mixin.sp {
+      justify-content: left;
+      padding: 0 20px;
+    }
+
+    .en-ttl {
+      color: #191919;
+      font-family: 'Lato', sans-serif;
+      font-size: 48px;
+      font-weight: bold;
+
+      @include mixin.tab {
+        font-size: 40px;
+      }
+
+      @include mixin.sp {
+        font-size: 32px;
+      }
+    }
+
+    .border {
+      width: 21px;
+      height: 25px;
+      margin-left: 8px;
+      margin-right: 8px;
+      margin-bottom: 3px;
+      transform: scaleX(-1);  // 左右反転
+
+      @include mixin.tab {
+        width: 18px;
+        height: 23px;
+        margin-bottom: 0;
+      }
+
+      @include mixin.sp {
+        width: 18px;
+        height: 21px;
+        margin-bottom: 0;
+      }
+
+      hr {
+        // 斜め線の描写
+        transform: rotate(50deg);
+        transform-origin: 0% 0%;
+        width: 32.6px;
+        border: 0;
+        border-top: 1.5px solid #4b6cb7;
+        margin: 0;
+        padding: 0;
+
+        @include mixin.tab {
+          width: 26px;
+          margin-top: 3px;
+        }
+
+        @include mixin.sp {
+          width: 23px;
+          margin-top: 3px;
+        }
+      }
+    }
+
+    .ja-ttl {
+      color: #4b6cb7;
+      font-size: 24px;
+      font-weight: 500;
+
+      @include mixin.tab {
+        font-size: 22px;
+      }
+
+      @include mixin.sp {
+        font-size: 20px;
+      }
+    }
+  }
+
+  &-card {
+    display: flex;
+    justify-content: center;
+
+    @include mixin.tab {
+      display: block;
+    }
+
+    @include mixin.sp {
+      display: block;
+    }
+
+    .card__1 {
+      width: 312px;
+      margin-top: 130px;
+      position: relative;
+
+      @include mixin.tab {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @include mixin.sp {
+        width: 100%;
+        margin-top: 35px;
+      }
+
+      img {
+        width: 312px;
+        height: 240px;
+
+        @include mixin.sp {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          vertical-align:top;
+        }
+      }
+
+      a {
+        display: inline-block;
+        background-color: rgba($color: #182848, $alpha: 0.64);
+        color: #ffffff;
+        font-size: 16px;
+        padding: 20px 154px 20px 14px;
+        position: absolute;
+        bottom: -22px;
+        right: -8px;
+        // position: relative;
+
+        @include mixin.sp {
+          background-color: rgba($color: #182848, $alpha: 0.32);
+          width: 100%;
+          height: 200px;
+          padding: 169px 154px 15px 17px;
+          bottom: 0;
+          left: 0;
+        }
+  
+        &::after {
+          content: "";
+          width: 14px;
+          height: 4px;
+          border-bottom: 1.5px solid #ffffff;
+          border-right: 1.5px solid #ffffff;
+          transform: skew(45deg);
+          position: absolute;
+          bottom: 24px;
+          right: 16px;
+
+          @include mixin.sp {
+            bottom: 19px;
+            left: 120px;
+            // right: 130px;
+          }
+        }
+      }
+    }
+
+    .card__2 {
+      width: 312px;
+      margin: 90px 36px 0 36px;
+      position: relative;
+
+      @include mixin.tab {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      @include mixin.sp {
+        width: 100%;
+        margin: 0;
+      }
+
+      img {
+        width: 312px;
+        height: 240px;
+
+        @include mixin.sp {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          vertical-align:top;
+        }
+      }
+
+      a {
+        display: inline-block;
+        background-color: rgba($color: #182848, $alpha: 0.64);
+        color: #ffffff;
+        font-size: 16px;
+        padding: 20px 154px 20px 14px;
+        position: absolute;
+        bottom: 18px;
+        right: -8px;
+        // position: relative;
+
+        @include mixin.tab {
+          bottom: -22px;
+        }
+
+        @include mixin.sp {
+          background-color: rgba($color: #182848, $alpha: 0.32);
+          width: 100%;
+          height: 200px;
+          padding: 169px 154px 15px 17px;
+          bottom: 0;
+          left: 0;
+        }
+  
+        &::after {
+          content: "";
+          width: 14px;
+          height: 4px;
+          border-bottom: 1.5px solid #ffffff;
+          border-right: 1.5px solid #ffffff;
+          transform: skew(45deg);
+          position: absolute;
+          bottom: 24px;
+          right: 16px;
+
+          @include mixin.sp {
+            bottom: 19px;
+            left: 120px;
+            // right: 130px;
+          }
+        }
+      }
+    }
+
+    .card__3 {
+      width: 312px;
+      margin-top: 50px;
+      position: relative;
+
+      @include mixin.tab {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 90px;
+      }
+
+      @include mixin.sp {
+        width: 100%;
+        margin-top: 0;
+      }
+
+      img {
+        width: 312px;
+        height: 240px;
+
+        @include mixin.sp {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+          vertical-align:top;
+        }
+      }
+
+      a {
+        display: inline-block;
+        background-color: rgba($color: #182848, $alpha: 0.64);
+        color: #ffffff;
+        font-size: 16px;
+        padding: 20px 154px 20px 14px;
+        position: absolute;
+        bottom: 58px;
+        right: -8px;
+        // position: relative;
+
+        @include mixin.tab {
+          bottom: -22px;
+        }
+
+        @include mixin.sp {
+          background-color: rgba($color: #182848, $alpha: 0.32);
+          width: 100%;
+          height: 200px;
+          padding: 169px 154px 15px 17px;
+          bottom: 0;
+          left: 0;
+        }
+  
+        &::after {
+          content: "";
+          width: 14px;
+          height: 4px;
+          border-bottom: 1.5px solid #ffffff;
+          border-right: 1.5px solid #ffffff;
+          transform: skew(45deg);
+          position: absolute;
+          bottom: 24px;
+          right: 16px;
+
+          @include mixin.sp {
+            bottom: 19px;
+            left: 120px;
+            // right: 130px;
+          }
+        }
+      }
+    }
+  }
+
+  .sp-bgc {
+
+    @include mixin.sp {
+    background-color: #f0f0f0;
+    padding-top: 40px;
+    padding-bottom: 120px;
+    }
+  }
+
+  .entry {
+    // inline-blockはaの親要素にtext-align: centerをしないと中央寄せ出来ない
+    text-align: center;
+    margin-top: 58px;
+
+    @include mixin.tab {
+      margin-top: 80px;
+    }
+
+    @include mixin.sp {
+      margin-top: 0;
+    }
+
+    a {
+      display: inline-block;
+      background-color: #4b6cb7;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 25px 72px 23px 40px;
+      box-shadow: 0px 2px 4px 0 rgba(24, 40, 72, 0.46);
+      position: relative;
+
+      @include mixin.sp {
+        font-size: 14px;
+        padding: 16px 79px 14px 51px;
+      }
+      
+      &::after {
+        content: "";
+        width: 14px;
+        height: 4px;
+        border-bottom: 1.5px solid #ffffff;
+        border-right: 1.5px solid #ffffff;
+        transform: skew(45deg);
+        position: absolute;
+        bottom: 28px;
+        right: 40px;
+
+        @include mixin.sp {
+          bottom: 18px;
+          right: 56px;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# エントリーはこちら
+=============================================== */
+
+.contact {
+  background: url(../img/1x/bckground-image-contact.jpg) no-repeat center center/cover;
+  height: 411px;
+  padding: 80px 0;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  @include mixin.sp {
+    background-image: url(../img/1x-sp/bckground-image-contact.jpg) no-repeat center center/cover;
+    height: fit-content;
+    padding: 94px 20px 96px;
+    text-align: left;
+  }
+
+  .main-ttl {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    @include mixin.sp {
+      justify-content: left;
+    }
+
+    .en-ttl {
+      color: #ffffff;
+      font-family: 'Lato', sans-serif;
+      font-size: 48px;
+      font-weight: bold;
+
+      @include mixin.tab {
+        font-size: 40px;
+      }
+
+      @include mixin.sp {
+        font-size: 32px;
+      }
+    }
+
+    .border {
+      width: 21px;
+      height: 25px;
+      margin-left: 8px;
+      margin-right: 8px;
+      margin-bottom: 3px;
+      transform: scaleX(-1);  // 左右反転
+
+      @include mixin.tab {
+        width: 18px;
+        height: 23px;
+        margin-bottom: 0;
+      }
+      
+      @include mixin.sp {
+        width: 18px;
+        height: 21px;
+        margin-bottom: 0;
+      }
+
+      hr {
+        // 斜め線の描写
+        transform: rotate(50deg);
+        transform-origin: 0% 0%;
+        width: 32.6px;
+        border: 0;
+        border-top: 1.5px solid #ffffff;
+        margin: 0;
+        padding: 0;
+
+        @include mixin.tab {
+          width: 26px;
+          margin-top: 3px;
+        }
+
+        @include mixin.sp {
+          width: 23px;
+          margin-top: 3px;
+        }
+      }
+    }
+
+    .ja-ttl {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 500;
+
+      @include mixin.tab {
+        font-size: 22px;
+      }
+
+      @include mixin.sp {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .sub-ttl {
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: 0.32px;
+    margin-top: 30px;
+
+    @include mixin.sp {
+      margin-top: 24px;
+    }
+
+    .pc-br {
+
+      @include mixin.sp {
+        display: none;
+      }
+    }
+  }
+
+  .btn-area {
+    margin-top: 50px;
+
+    @include mixin.sp {
+      margin-top: 24px;
+    }
+
+    .consult {
+      display: inline-block;
+      background-color: #b8614b;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 28px 112px;
+      box-shadow: 0px 2px 4px 0 rgba(25, 25, 25, 0.46);
+      position: relative;
+
+      @include mixin.sp {
+        display: block;
+        width: 335px;
+        font-size: 14px;
+        padding: 18px 125px 16px 126px;
+      }
+
+      &::before {
+        content: url(../img/1x/Backhoe.svg);
+        width: 28px;
+        height: 14px;
+        position: absolute;
+        top: 27px;
+        left: 72px;
+
+        @include mixin.sp {
+          content: url(../img/1x-sp/Backhoe.svg);
+          width: 16px;
+          height: 12px;
+          top: 18px;
+          left: 24px;
+        }
+      }
+
+      &::after {
+        content: "";
+        width: 14px;
+        height: 4px;
+        border-bottom: 1.5px solid #ffffff;
+        border-right: 1.5px solid #ffffff;
+        transform: skew(45deg);
+        position: absolute;
+        bottom: 32px;
+        right: 79px;
+
+        @include mixin.sp {
+          bottom: 21px;
+          right: 32px;
+        }
+      }
+    }
+
+    .special {
+      display: inline-block;
+      background-color: #191919;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 28px 96px;
+      margin-left: 80px;
+      box-shadow: 0px 2px 4px 0 rgba(25, 25, 25, 0.46);
+      position: relative;
+
+      @include mixin.sp {
+        display: block;
+        width: 335px;
+        font-size: 14px;
+        padding: 18px 111px 16px 112px;
+        margin-left: 0;
+        margin-top: 24px;
+      }
+
+      &::before {
+        content: url(../img/1x/Factory.svg);
+        width: 20px;
+        height: 17px;
+        position: absolute;
+        top: 28px;
+        left: 60px;
+
+        @include mixin.sp {
+          content: url(../img/1x-sp/Factory.svg);
+          width: 14px;
+          height: 12px;
+          top: 18px;
+          left: 24px;
+        }
+      }
+
+      &::after {
+        content: "";
+        width: 14px;
+        height: 4px;
+        border-bottom: 1.5px solid #ffffff;
+        border-right: 1.5px solid #ffffff;
+        transform: skew(45deg);
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+
+        @include mixin.sp {
+          bottom: 21px;
+          right: 32px;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# 会社情報
+=============================================== */
+
+.corp-info {
+  background-color: #182848;
+  padding: 87px 0 108px 0;
+
+  @include mixin.sp {
+    padding: 40px 0;
+  }
+
+  .inner {
+    max-width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #ffffff;
+
+    @include mixin.sp {
+      display: block;
+    }
+
+    // PC用会社情報（左）
+    .corp-left {
+
+      @include mixin.sp {
+        display: none;
+      }
+
+      .corp-logo {
+
+        a img {
+          width: 271px;
+          height: 58px;
+        }
+      }
+
+      .name {
+        font-size: 16px;
+        letter-spacing: 0.32px;
+        margin-top: 39px;
+      }
+
+      .post-num {
+        font-size: 16px;
+        letter-spacing: 0.32px;
+        margin-top: 24px;
+      }
+
+      .address {
+        font-size: 16px;
+        letter-spacing: 0.32px;
+        margin-top: 22px;
+      }
+
+      .tel {
+        font-size: 16px;
+        letter-spacing: 0.32px;
+        margin-top: 25px;
+      }
+
+      .fax {
+        font-size: 16px;
+        letter-spacing: 0.32px;
+        margin-top: 25px;
+      }
+    }
+
+    // PC用会社情報（右）
+    .corp-right {
+      display: flex;
+      flex-direction: row-reverse;
+
+      @include mixin.sp {
+        display: none;
+      }
+
+      .group__1 {
+        -ms-writing-mode: tb-rl;
+        writing-mode: vertical-rl;
+        letter-spacing: 3.2px;
+        padding-top: 91px;
+        margin-left: 78px;
+
+        a {
+          display: block;
+          color: #ffffff;
+          font-size: 16px;
+
+          &:nth-child(1) {
+            margin-left: 23px;
+          }
+        }
+      }
+
+      .group__2 {
+        -ms-writing-mode: tb-rl;
+        writing-mode: vertical-rl;
+        letter-spacing: 3.2px;
+        padding-top: 91px;
+
+        a {
+          display: block;
+          color: #ffffff;
+          font-size: 16px;
+
+          &:nth-child(1) {
+            margin-left: 22px;
+          }
+
+          &:nth-child(2) {
+            margin-left: 22px;
+          }
+
+          &:nth-child(3) {
+            margin-left: 22px;
+          }
+        }
+      }
+    }
+
+    .sp-corp-up {
+      display: none;
+
+      @include mixin.sp {
+        display: block;
+      }
+
+      .group__3 {
+
+        a {
+          display: block;
+          color: #ffffff;
+          font-size: 14px;
+        }
+
+        a:not(:first-child) {
+          margin-top: 23px;
+        }
+      }
+
+      .group__4 {
+        margin-top: 64px;
+
+        a {
+          display: block;
+          color: #ffffff;
+          font-size: 14px;
+        }
+
+        a:not(:first-child) {
+          margin-top: 23px;
+        }
+      }
+    }
+
+    .sp-corp-down {
+      display: none;
+
+      @include mixin.sp {
+        display: block;
+        margin-top: 81px;
+      }
+
+      .sp-corp-logo {
+
+        a img {
+          width: 159px;
+          height: 34px;
+        }
+      }
+
+      p {
+        font-size: 14px;
+      }
+
+      .name {
+        margin-top: 22px;
+      }
+
+      .address {
+        margin-top: 16px;
+      }
+
+      .tel {
+        margin-top: 16px;
+
+        a {
+          // iphoneでデフォルトでグレーになる為、カラーを設定
+          color: #ffffff;
+        }
+      }
+
+      .fax {
+        margin-top: 19px;
+
+        a {
+          // iphoneでデフォルトでグレーになる為、カラーを設定
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+# フッター
+=============================================== */
+
+footer {
+  background-color: #191919;
+  padding: 24px 0;
+
+  @include mixin.sp {
+    padding: 15px 0 17px;
+  }
+
+  .inner {
+    max-width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    p {
+      color: #ffffff;
+      font-size: 12px;
+
+      @include mixin.sp {
+        font-size: 10px;
+      }
+    }
+  }
+}
