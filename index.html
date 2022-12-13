@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>株式会社 園崎組</title>
+  <meta name="description" content="私達のモットーは、「社会基盤から世界をより良くする」こと。そのために最前線で国家規模のプロフェクトに参画することもあれば、世界各国の技術者、研究者と共に次世代の建設機材の研究開発事業も同時に行うことで、業界の進化の促進を担っています。">
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <!-- "Googleフォント" -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- aos.js -->
+  <link rel="stylesheet" href="css/aos.css">
+  <script src="js/aos.js" defer></script>
+</head>
+<body>
+  <!-- "ローディング画面" -->
+  <div class="loading js-loading">
+    <img src="img/1x/logo-w-2.svg" alt="SONOZAKI CO.LTD">
+    <!-- <p>Now Loading...</p> -->
+  </div>
+  <!-- "全体" -->
+  <div id="wrapper">
+    <!-- "ヘッダー" -->
+    <header id="header" class="header">
+      <div class="inner">
+        <h1 class="header-logo">
+          <a href="index.html">
+            <img src="img/1x/logo-w.svg" alt="株式会社 園崎組">
+          </a>
+        </h1>
+        <!-- PC用メニュー -->
+        <nav class="header-nav nav">
+          <ul class="nav__items nav-items">
+            <li class="nav-items__item">
+              <a href="index.html" class="header-link">
+                <p class="ja">トップ</p>
+                <p class="en">TOP</p>
+              </a>
+            </li>
+            <div class="border"><hr></div>
+            <li class="nav-items__item">
+              <a href="#services">
+                <p class="ja services-link">事業内容</p>
+                <p class="en services-link">SERVICES</p>
+              </a>
+            </li>
+            <div class="border"><hr></div>
+            <li class="nav-items__item">
+              <a href="#about">
+                <p class="ja about-link">園崎組について</p>
+                <p class="en about-link">ABOUT</p>
+              </a>
+            </li>
+            <div class="border"><hr></div>
+            <li class="nav-items__item">
+              <a href="#works">
+                <p class="ja works-link">園崎組の実績</p>
+                <p class="en works-link">WORKS</p>
+              </a>
+            </li>
+            <div class="border"><hr></div>
+            <li class="nav-items__item">
+              <a href="#recruit">
+                <p class="ja recruit-link">採用情報</p>
+                <p class="en recruit-link">RECRUIT</p>
+              </a>
+            </li>
+            <div class="border"><hr></div>
+            <li class="nav-items__item">
+              <a href="#contact">
+                <p class="ja contact-link">お問い合わせ</p>
+                <p class="en contact-link">CONTACT</p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- ハンバーガーボタン -->
+        <button class="c-hamburger" id="js-hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <!-- スマホ用ドロワーメニュー -->
+        <div class="c-drawer" id="js-drawer">
+          <div class="drawer-header">
+            <h1 class="header-logo">
+              <a href="index.html">
+                <img src="img/1x/logo-w.svg" alt="株式会社 園崎組">
+              </a>
+            </h1>
+          </div>
+          <ul class="c-drawer__list">
+            <li class="c-drawer__item">
+              <a href="index.html" class="c-drawer__link" id="js-top">
+                <p class="ja-top">トップ</p>
+                <p class="en-top">TOP</p>
+              </a>
+            </li>
+            <li class="c-drawer__item">
+              <a href="#services" class="c-drawer__link" id="js-services">
+                <p class="ja">事業内容</p>
+                <p class="en">SERVICES</p>
+              </a>
+            </li>
+            <li class="c-drawer__item">
+              <a href="#about" class="c-drawer__link" id="js-about">
+                <p class="ja">園崎組について</p>
+                <p class="en">ABOUT</p>
+              </a>
+            </li>
+            <li class="c-drawer__item">
+              <a href="#works" class="c-drawer__link" id="js-works">
+                <p class="ja">園崎組の実績</p>
+                <p class="en">WORKS</p>
+              </a>
+            </li>
+            <li class="c-drawer__item">
+              <a href="#recruit" class="c-drawer__link" id="js-recruit">
+                <p class="ja">採用情報</p>
+                <p class="en">RECRUIT</p>
+              </a>
+            </li>
+            <li class="c-drawer__item">
+              <a href="#contact" class="c-drawer__link" id="js-contact">
+                <p class="ja">お問い合わせ</p>
+                <p class="en">CONTACT</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div><!-- .inner -->
+    </header><!-- #header -->
+
+    <!-- "メインビジュアル" -->
+    <section class="mv">
+      <div class="mv-img">
+        <img src="img/1x/top-image-1.png" alt="image-1" class="image">
+        <img src="img/1x/top-image-2.png" alt="image-2" class="image">
+        <img src="img/1x/top-image-3.png" alt="image-3" class="image">
+      </div>
+      <div class="sp-mv">
+        <img src="img/1x-sp/top-image-1.png" alt="sp-image-1" class="sp-image">
+        <img src="img/1x-sp/top-image-2.png" alt="sp-image-1" class="sp-image">
+        <img src="img/1x-sp/top-image-3.png" alt="sp-image-1" class="sp-image">
+      </div>
+      <div class="inner">
+        <h1 class="main-ttl">CHALLENGE<br>FROM <br class="sp-br">THE BOTTOM</h1>
+        <div class="sub-ttl__1">
+          <h2>社会の基礎を支え</h2>
+        </div>
+        <div class="sub-ttl__2">
+          <h2>基礎から世界を変革する会社</h2>
+        </div>
+        <div class="news">
+          <p class="en-ttl">NEWS</p>
+          <div class="white-area">
+            <p class="date">2021.06.12</p>
+            <div class="ja-ttl">
+              <p>お知らせ</p>
+            </div>
+            <p class="info">新サイトを公開しました。</p>
+          </div>
+        </div><!-- ."news" -->
+      </div><!-- ."inner" -->
+    </section><!-- ."mv" -->
+    
+
+    <!-- "事業内容" -->
+    <section class="services" id="services">
+      <img src="img/1x/image-services.jpg" data-aos="fade-right">
+      <div class="text-area">
+        <div class="main-ttl">
+          <h2 class="en-ttl">SERVICES</h2>
+          <div class="border"><hr></div>
+          <h3 class="ja-ttl">事業内容</h3>
+        </div>
+        <h3 class="sub-ttl__1">人々の生活基盤を</h3>
+        <h3 class="sub-ttl__2">世界最高峰の技術で支える</h3>
+        <p class="contents">私達のモットーは、「社会基盤から世界をより良くする」こと。<br>そのために最前線で国家規模のプロフェクトに参画することもあれば、<br>世界各国の技術者、研究者と共に次世代の建設機材の研究開発事業も<br>同時に行うことで、業界の進化の促進を担っています。</p>
+        <div class="detail">
+          <a href="#">事業内容を更に知る</a>
+        </div>
+      </div>
+    </section><!-- ."services" -->
+
+    <!-- "園崎組について" -->
+    <section class="about" id="about">
+      <img src="img/1x-sp/image-about.jpg" alt="園崎組について" class="sp-img">
+      <div class="card" data-aos="zoom-in">
+        <div class="main-ttl">
+          <h2 class="en-ttl">ABOUT</h2>
+          <div class="border"><hr></div>
+          <h3 class="ja-ttl">園崎組について</h3>
+        </div>
+        <p class="contents">園崎組は埼玉県秩父市にて、主に土木工事にて<br class="pc-br">社会基盤を支える企業になります。<br>また、自社工場において施工に必要とされる<br class="pc-br">各種資材も生産しており、各業者に提供することで、<br class="pc-br">社会基盤の構築・整備に貢献しております。</p>
+        <div class="detail">
+          <a href="#">詳しく見る</a>
+        </div>
+        <img src="img/1x/image-about.jpg" alt="園崎組について" class="pc-img">
+      <div>
+    </section><!-- ."about" -->
+    
+    <!-- "園崎組の実績" -->
+    <section class="works" id="works">
+      <div class="main-ttl">
+        <h2 class="en-ttl">WORKS</h2>
+        <div class="border"><hr></div>
+        <h3 class="ja-ttl">園崎組の実績</h3>
+      </div>
+      <h3 class="sub-ttl">社会を基礎から、<br class="sp-br">変革してきたプロジェクト</h3>
+      <p class="introduce">創業以來より培われた確かな技術力で社会を変革する様々な案件を手掛けてきました。<br class="pc-br">その一部を紹介させていただきます。</p>
+
+      <!-- "PC用" -->
+      <div class="works-card">
+        <div class="card__1" data-aos="slide-up">
+          <img src="img/1x/image-works-1.jpg">
+          <div class="text-area">
+            <p class="ttl">施工実績</p>
+            <p class="contents">東南アジア某国での国家規模のプロジェクトに参画した際の園崎組のプロジェクトストーリーを記載しています。</p>
+          </div>
+        </div><!-- .card__1 -->
+        <div class="card__2" data-aos="slide-up" data-aos-delay="500">
+          <img src="img/1x/image-works-2.jpg">
+          <div class="text-area">
+            <p class="ttl">商品納入実績</p>
+            <p class="contents">土木・建設資材のプロフェッショナルとして、現場で必要となる各種資材を提供しています。</p>
+          </div>
+        </div><!-- .card__2 -->
+      </div><!-- .works-card -->
+
+      <!-- "スマホ用" -->
+      <div class="sp-works">
+        <div class="sp__1" data-aos="slide-right">
+          <img src="img/1x-sp/image-works01.jpg" alt="施行実績" class="sp__1-img">
+          <div class="text-area">
+            <p class="ttl">施工実績</p>
+            <p class="contents">東南アジア某国での国家規模のプロジェクトに参画した際の園崎組のプロジェクトストーリーを記載しています。</p>
+          </div>
+        </div>
+        <div class="sp__2" data-aos="slide-left">
+          <img src="img/1x-sp/image-works02.jpg" alt="商品納入実績" class="sp__2-img">
+          <div class="text-area">
+            <p class="ttl">商品納入実績</p>
+            <p class="contents">土木・建設資材のプロフェッショナルとして、現場で必要となる各種資材を提供しています。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="center-btn">  <!-- ボタンの中央寄せ用のdiv -->
+        <a href="#">実績一覧を見る</a>
+      </div>
+    </section><!-- ."works" -->
+
+    <!-- "採用情報" -->
+    <section class="recruit" id="recruit">
+      <div class="main-ttl">
+        <h2 class="en-ttl">RECRUIT</h2>
+        <div class="border"><hr></div>
+        <h3 class="ja-ttl">採用情報</h3>
+      </div>
+      <div class="recruit-card">
+        <div class="card__1" data-aos="flip-left">
+          <img src="img/1x/image-recruit-1.jpg">
+          <a href="#">園崎組を知る</a>
+        </div><!-- .card__1 -->
+        <div class="card__2" data-aos="flip-left" data-aos-delay="500">
+          <img src="img/1x/image-recruit-2.jpg">
+          <a href="#">園崎組の一日</a>
+        </div><!-- .card__2 -->
+        <div class="card__3" data-aos="flip-left" data-aos-delay="1000">
+          <img src="img/1x/image-recruit-3.jpg">
+          <a href="#">求める人物像</a>
+        </div><!-- .card__3 -->
+      </div><!-- .recruit-card -->
+      <div class="sp-bgc">
+        <div class="entry">
+          <a href="#">エントリーはこちら</a>  <!-- ボタンの中央寄せ用のdiv -->
+        </div>
+      </div>
+    </section><!-- ."recruit " -->
+
+    <!-- "エントリーはこちら" -->
+    <section class="contact" id="contact">
+      <div class="main-ttl">
+        <h2 class="en-ttl">CONTACT</h2>
+        <div class="border"><hr></div>
+        <h3 class="ja-ttl">お問い合わせ</h3>
+      </div>
+      <p class="sub-ttl">園崎組では一般的な施工から特注部品、機械の開発・製造まで一貫して対応しております。<br class="pc-br">お気軽にご連絡ください。</p>
+      <div class="btn-area">
+        <a href="#" class="consult">施工のご相談</a>
+        <a href="#" class="special">特注制作のご相談</a>
+      </div>
+    </section><!-- ."contact" -->
+
+    <!-- "会社情報" -->
+    <section class="corp-info">
+      <div class="inner">
+        <!-- "PC用会社情報（左）" -->
+        <div class="corp-left">
+          <h1 class="corp-logo">
+            <a href="index.html">
+              <img src="img/1x/logo-w-2.svg" alt="株式会社 園崎組">
+            </a>
+          </h1>
+          <p class="name">株式会社 園崎組</p>
+          <p class="post-num">〒000-000</p>
+          <p class="address">埼玉県秩父市×××××××××××</p>
+          <p class="tel">TEL 0494-00-0000</p>
+          <p class="fax">FAX 000-0000-0000</p>
+        </div><!-- ."corp-left" -->
+
+        <!-- "PC用会社情報（右）" -->
+        <div class="corp-right">
+          <div class="group__1">
+            <a href="#contact">お問い合わせ</a>
+            <a href="#recruit">採用</a>
+          </div>
+          <div class="group__2">
+            <a href="#works">園崎組の実績</a>
+            <a href="#about">園崎組について</a>
+            <a href="#services">事業内容</a>
+            <a href="index.html">トップ</a>
+          </div>
+        </div><!-- ."corp-right" -->
+
+        <!-- スマホ用会社情報（上） -->
+        <div class="sp-corp-up">
+          <div class="group__3">
+            <a href="index.html">トップ</a>
+            <a href="#services">事業内容</a>
+            <a href="#about">園崎組について</a>
+            <a href="#works">園崎組の実績</a>
+          </div>
+          <div class="group__4">
+            <a href="#recruit">採用</a>
+            <a href="#contact">お問い合わせ</a>
+          </div>
+        </div><!-- ."sp-corp-up" -->
+
+        <!-- スマホ用会社情報（下） -->
+        <div class="sp-corp-down">
+          <h1 class="sp-corp-logo">
+            <a href="index.html">
+              <img src="img/1x/logo-w-2.svg" alt="株式会社 園崎組">
+            </a>
+          </h1>
+          <p class="name">株式会社 園崎組</p>
+          <p class="address">〒000-000 埼玉県秩父市×××××××</p>
+          <!-- 電話番号は下記のようにaタグで囲う（iphone対策） -->
+          <p class="tel">TEL <a href="tel:0494000000">0494-00-0000</a></p>
+          <p class="fax">FAX <a href="tel:0000000000">000-0000-0000</a></p>
+        </div><!-- ."sp-corp-down" -->
+      </div><!-- .inner -->
+    </section><!-- ."corp-info" -->
+
+    <!-- "フッター" -->
+    <footer>
+      <div class="inner">
+        <p>Copyright © SONOZAKI CO.LTD All Rights Reserved.</p>
+      </div>
+    </footer><!-- .copy-right -->
+  </div><!-- #"wrapper" -->
+  <!-- jQueryの読み込み -->
+  <script src="js/jquery-3.6.1.min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
